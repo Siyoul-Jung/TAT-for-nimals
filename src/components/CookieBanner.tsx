@@ -40,6 +40,9 @@ export default function CookieBanner() {
           We use essential cookies to keep your session secure.{' '}
           <Link
             href="/privacy"
+            // "Learn more" reads fine beside the sentence but says nothing on
+            // its own, which is how a screen reader and a crawler meet it.
+            aria-label="Learn more in our privacy policy"
             className="underline underline-offset-2 transition-opacity hover:opacity-70"
             style={{ color: 'rgba(28,16,7,0.65)' }}
           >
