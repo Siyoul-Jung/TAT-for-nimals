@@ -11,6 +11,11 @@ export const metadata: Metadata = {
 }
 
 export default async function WelcomeBackPage() {
+  // Read the cookie first. The expiry check below asks for the current time,
+  // which Next refuses to answer while prerendering — reading Request data
+  // ahead of it takes this page off the prerender path so both can run.
+  const cookieStore = await cookies()
+
   if (isWelcomeBackExpired()) {
     return (
       <main className="min-h-screen bg-cream flex items-center justify-center px-6 py-20">
@@ -19,7 +24,6 @@ export default async function WelcomeBackPage() {
     )
   }
 
-  const cookieStore = await cookies()
   const unlocked = cookieStore.get('welcome_back_unlocked')?.value === '1'
 
   return (
